@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GM Monad TX</title>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        font-family: sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+      }
+      button {
+        padding: 12px 24px;
+        font-size: 16px;
+        background-color: #6a0dad;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Send a Monad TX 🚀</h1>
+    <button onclick="sendTx()">Send TX</button>
+    <p id="result"></p>
+
+    <script>
+      async function sendTx() {
+        const res = await fetch('/frame', { method: 'POST' });
+        const json = await res.json();
+        document.getElementById('result').innerText = json.success
+          ? `Tx sent! Hash: ${json.txHash}`
+          : `Error: ${json.error}`;
+      }
+    </script>
+  </body>
+</html>
